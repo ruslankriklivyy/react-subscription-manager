@@ -1,8 +1,10 @@
 import React from 'react';
+import { useStore } from 'effector-react';
 import { TopSubs, SubsCategory, SubsItems, AddModal } from './components';
+import { $isVisibleModal } from './store/store';
 
 function App() {
-  const [visible, setVisible] = React.useState(false);
+  const visible = useStore($isVisibleModal);
 
   return (
     <div className="app">
@@ -10,7 +12,7 @@ function App() {
         <AddModal visible={visible} />
         <div className="box">
           <div className="left-section">
-            <TopSubs setVisible={setVisible} />
+            <TopSubs />
             <div className="subs">
               <SubsCategory />
               <SubsItems />

@@ -1,4 +1,6 @@
 import React from 'react';
+import { setIsVisibleModal } from '../../store/store';
+
 import styles from './addModal.module.scss';
 import paletteSvg from '../../assets/img/palette.svg';
 import okSvg from '../../assets/img/ok.svg';
@@ -32,7 +34,7 @@ const AddModal: React.FC<IAddModal> = ({ visible }) => {
             <button>
               <img src={okSvg} alt="ok svg" />
             </button>
-            <button>
+            <button onClick={() => setIsVisibleModal(false)}>
               <img src={cancelSvg} alt="cancel svg" />
             </button>
           </div>
