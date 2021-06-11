@@ -13,6 +13,7 @@
     "effector": "^21.8.11",
     "effector-react": "^21.3.2",
     "react": "^17.0.2",
+    "react-colorful": "^5.2.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "sass": "^1.34.1",

@@ -18,22 +18,26 @@
 .addModalWrapper {
   text-align: center;
 }
+.addModalColorPicker {
+  display: flex;
+  justify-content: center;
+}
 .addModalPalette {
   button {
     width: 60px;
     height: 60px;
     cursor: pointer;
-    border: 3px solid #35383e;
+    border: none;
     border-radius: 10px;
     background: transparent;
     transition: all 0.2s ease;
+    margin-bottom: 20px;
 
     &:hover {
       background: #35383e;
     }
     &:active {
       background: #25272b;
-      border-color: #25272b;
     }
     img {
       width: 30px;
