@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from 'effector-react';
-import { TopSubs, SubsCategory, SubsItems, AddModal } from './components';
+import { TopSubs, SubsCategory, SubsItems, AddModal, UserInfo } from './components';
 import { $isVisibleModal } from './store/store';
 
 function App() {
@@ -17,6 +17,9 @@ function App() {
               <SubsCategory />
               <SubsItems />
             </div>
+          </div>
+          <div className="right-section">
+            <UserInfo />
           </div>
         </div>
       </div>
