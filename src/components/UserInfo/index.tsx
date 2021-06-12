@@ -1,8 +1,23 @@
 import React from 'react';
 import styles from './userInfo.module.scss';
 import editSvg from '../../assets/img/edit.svg';
+import { useStore } from 'effector-react';
+import { $subsItems, $totalSumSubs, $userProfit, setUserProfit } from '../../store/store';
 
 const UserInfo = () => {
+  const profit = useStore($userProfit);
+  const totalSum = useStore($totalSumSubs);
+  const items = useStore($subsItems);
+
+  const editProfit = () => {
+    const profit = Number(prompt('Enter your profit: ', '0'));
+    if (profit) {
+      setUserProfit(profit);
+    } else {
+      alert('Enter only number.');
+    }
+  };
+
   return (
     <div className={styles.userInfo}>
       <div className={styles.userInfoTop}>
@@ -15,17 +30,17 @@ const UserInfo = () => {
       <div className={styles.userInfoProfit}>
         <h4>Your Profit</h4>
         <div className={styles.userInfoProfitTotal}>
-          <button>
+          <button onClick={editProfit}>
             <img src={editSvg} alt="edit svg" />
           </button>
-          <h4>150</h4>
+          <h4>{profit}</h4>
           <span>USD/month</span>
         </div>
       </div>
       <div className={styles.userInfoProfit}>
         <h4>Subscription</h4>
         <div className={styles.userInfoProfitTotal}>
-          <h4>50</h4>
+          <h4>{items.length > 0 ? totalSum : 0}</h4>
           <span>USD/month</span>
         </div>
       </div>

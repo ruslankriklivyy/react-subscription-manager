@@ -21,7 +21,7 @@ const SubsItems = () => {
             <span
               className={styles.subsLogo}
               style={{ background: `rgba(${color}, 0.4)`, color: `rgba(${color}, 1)` }}>
-              N
+              {name[0]}
             </span>
             <span>{name}</span>
           </div>
