@@ -17,11 +17,13 @@ export const $isVisiblePicker = createStore(false).on(
   setIsVisiblePicker,
   (state, visible) => visible,
 );
+
 export const $subsItems = createStore([
   { id: 1, name: 'Netflix', price: 14.5, payment: 1, color: [66, 153, 118] },
 ])
   .on(addToSubsItems, (state, sub) => [...state, sub])
   .on(removeItemFromSubs, (state, subId) => state.filter((item) => item.id !== subId));
+
 export const $userProfit = createStore(120).on(setUserProfit, (state, profit) => profit);
 export const $userTotalSubs = createStore(0);
 export const $totalSumSubs = combine($subsItems, $userTotalSubs, (subs, total) => {

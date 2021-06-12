@@ -1,19 +1,20 @@
 import React from 'react';
-import { RgbColorPicker } from 'react-colorful';
+import ReactDOM from 'react-dom';
+import { useStore } from 'effector-react';
+
 import {
   $isVisibleModal,
-  $isVisiblePicker,
   addToSubsItems,
   setIsVisibleModal,
   setIsVisiblePicker,
 } from '../../store/store';
-
-import styles from './addModal.module.scss';
-import paletteSvg from '../../assets/img/palette.svg';
-import okSvg from '../../assets/img/ok.svg';
-import cancelSvg from '../../assets/img/cancel.svg';
-import { useStore } from 'effector-react';
+import Palette from './Palette';
 import { ISubsItem } from '../../interfaces/interfaces';
+import InputName from './InputName';
+import InputPrice from './InputPrice';
+import InputPayment from './InputPayment';
+import ModalActions from './ModalActions';
+import styles from './addModal.module.scss';
 
 const AddModal = () => {
   const [color, setColor] = React.useState({ r: 0, g: 0, b: 0 });
@@ -21,7 +22,8 @@ const AddModal = () => {
   const [price, setPrice] = React.useState(0);
   const [payment, setPayment] = React.useState(0);
   const visibleModal = useStore($isVisibleModal);
-  const visiblePicker = useStore($isVisiblePicker);
+
+  const blockOutRef = React.useRef<HTMLDivElement>(null);
 
   const addToSubs = () => {
     if (!name || !price || !payment) {
@@ -40,65 +42,63 @@ const AddModal = () => {
     setIsVisiblePicker(false);
   };
 
-  return (
+  const closeModal = React.useCallback(() => {
+    setIsVisibleModal(false);
+    setName('');
+    setPrice(0);
+    setPayment(0);
+  }, []);
+
+  const escapeListener = React.useCallback(
+    (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    },
+    [closeModal],
+  );
+  const clickListener = React.useCallback(
+    (e) => {
+      if (
+        e.target.className &&
+        blockOutRef.current &&
+        e.target.className === blockOutRef.current.className
+      ) {
+        closeModal();
+      }
+    },
+    [blockOutRef, closeModal],
+  );
+  React.useEffect(() => {
+    document.addEventListener('click', clickListener);
+    document.addEventListener('keyup', escapeListener);
+    return () => {
+      document.removeEventListener('click', clickListener);
+      document.removeEventListener('keyup', escapeListener);
+    };
+  }, [clickListener, escapeListener]);
+
+  return ReactDOM.createPortal(
     <>
       <div
+        ref={blockOutRef}
         className={`${
           !visibleModal ? styles.blockOut : styles.blockOut + ' ' + styles.show
         }`}></div>
       <div className={`${!visibleModal ? styles.addModal : styles.addModal + ' ' + styles.show}`}>
         <div className={styles.addModalWrapper}>
-          <div className={styles.addModalPalette}>
-            <button
-              onClick={() => setIsVisiblePicker(!visiblePicker)}
-              style={{ background: `rgba(${Object.values(color)}, 0.4)` }}>
-              <img src={paletteSvg} alt="palette svg" />
-            </button>
-            {visiblePicker && (
-              <div className={styles.addModalColorPicker}>
-                <RgbColorPicker color={color} onChange={setColor} />
-              </div>
-            )}
-          </div>
-          <div className={styles.addModalInput}>
-            <input
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              required
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className={styles.addModalInput}>
-            <input
-              type="number"
-              placeholder="Enter price"
-              value={price}
-              required
-              onChange={(e) => setPrice(Number(e.target.value))}
-            />
-          </div>
-          <div className={styles.addModalInput}>
-            <input
-              type="number"
-              placeholder="Enter payment"
-              value={payment}
-              required
-              onChange={(e) => setPayment(Number(e.target.value))}
-            />
-          </div>
+          <Palette color={color} setColor={setColor} />
+          <InputName name={name} setName={setName} />
+          <InputPrice price={price} setPrice={setPrice} />
+          <InputPayment payment={payment} setPayment={setPayment} />
           <div className={styles.addModalBottom}>
-            <button onClick={addToSubs}>
-              <img src={okSvg} alt="ok svg" />
-            </button>
-            <button onClick={() => setIsVisibleModal(false)}>
-              <img src={cancelSvg} alt="cancel svg" />
-            </button>
+            <ModalActions addToSubs={addToSubs} closeModal={closeModal} />
           </div>
         </div>
       </div>
-    </>
+    </>,
+    document.getElementById('addModal')!,
   );
 };
 
-export default AddModal;
+export default React.memo(AddModal);
