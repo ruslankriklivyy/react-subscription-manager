@@ -2,19 +2,26 @@ import React from 'react';
 import styles from './userInfo.module.scss';
 import editSvg from '../../assets/img/edit.svg';
 import { useStore } from 'effector-react';
-import { $subsItems, $totalSumSubs, $userProfit, setUserProfit } from '../../store/store';
+import {
+  $subsItems,
+  $totalSpend,
+  $totalSumSubs,
+  $userProfit,
+  setUserProfit,
+} from '../../store/store';
 
 const UserInfo = () => {
   const profit = useStore($userProfit);
   const totalSum = useStore($totalSumSubs);
   const items = useStore($subsItems);
+  const percentSpend = useStore($totalSpend);
 
   const editProfit = () => {
     const profit = Number(prompt('Enter your profit: ', '0'));
-    if (profit) {
+    if (profit && profit > 0) {
       setUserProfit(profit);
     } else {
-      alert('Enter only number.');
+      alert('⚠ Enter a number and it must be greater than zero.');
     }
   };
 
@@ -43,6 +50,10 @@ const UserInfo = () => {
           <h4>{items.length > 0 ? totalSum : 0}</h4>
           <span>USD/month</span>
         </div>
+      </div>
+      <div className={styles.userInfoSpend}>
+        <h5>On subscriptions as a percentage you spend</h5>
+        <span>{items.length > 0 ? percentSpend.toFixed(1) : 0}%</span>
       </div>
     </div>
   );

@@ -24,6 +24,10 @@ const AddModal = () => {
   const visiblePicker = useStore($isVisiblePicker);
 
   const addToSubs = () => {
+    if (!name || !price || !payment) {
+      return alert('⚠ Enter info!');
+    }
+
     const newObj: ISubsItem = {
       id: Math.random(),
       name,
@@ -61,22 +65,25 @@ const AddModal = () => {
               type="text"
               placeholder="Enter name"
               value={name}
+              required
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className={styles.addModalInput}>
             <input
-              type="text"
+              type="number"
               placeholder="Enter price"
               value={price}
+              required
               onChange={(e) => setPrice(Number(e.target.value))}
             />
           </div>
           <div className={styles.addModalInput}>
             <input
-              type="text"
+              type="number"
               placeholder="Enter payment"
               value={payment}
+              required
               onChange={(e) => setPayment(Number(e.target.value))}
             />
           </div>

@@ -29,3 +29,10 @@ export const $totalSumSubs = combine($subsItems, $userTotalSubs, (subs, total) =
   const totalSum = totalSubs.reduce((acc, num) => (acc += num));
   return (total = totalSum);
 });
+export const $totalSpend = combine($totalSumSubs, $userProfit, (totalSumSubs, userProfit) => {
+  let percent = (totalSumSubs / userProfit) * 100;
+  if (percent > 100) {
+    percent = 100;
+  }
+  return percent;
+});
