@@ -20,7 +20,7 @@ const SubsItems = () => {
           <div className={styles.subsItemInfo}>
             <span
               className={styles.subsLogo}
-              style={{ background: `rgba(${color}, 0.4)`, color: `rgba(${color}, 1)` }}>
+              style={{ background: `rgba(${color}, 0.3)`, color: `rgba(${color}, 1)` }}>
               {name[0].toUpperCase()}
             </span>
             <span>{name}</span>

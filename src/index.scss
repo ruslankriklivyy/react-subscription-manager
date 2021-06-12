@@ -103,6 +103,31 @@ section {
   display: block;
 }
 
+html,
+body {
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #999;
+  }
+  ::-webkit-scrollbar-track-piece {
+    background-color: #ffffff;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: #429976;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: #999;
+  }
+  ::-webkit-resizer {
+    background-color: #666;
+  }
+}
+
 body {
   line-height: 1;
   font-family: 'Poppins', sans-serif;
@@ -150,6 +175,9 @@ table {
   margin: 0 auto;
   padding: 0 15px;
   width: 100%;
+}
+.subs {
+  height: 80vh;
 }
 .box {
   display: flex;

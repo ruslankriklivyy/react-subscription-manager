@@ -22,7 +22,6 @@ const AddModal = () => {
   const [price, setPrice] = React.useState(0);
   const [payment, setPayment] = React.useState(0);
   const visibleModal = useStore($isVisibleModal);
-
   const blockOutRef = React.useRef<HTMLDivElement>(null);
 
   const addToSubs = () => {
@@ -38,12 +37,12 @@ const AddModal = () => {
       payment,
     };
     addToSubsItems(newObj);
-    setIsVisibleModal(false);
-    setIsVisiblePicker(false);
+    closeModal();
   };
 
   const closeModal = React.useCallback(() => {
     setIsVisibleModal(false);
+    setIsVisiblePicker(false);
     setName('');
     setPrice(0);
     setPayment(0);

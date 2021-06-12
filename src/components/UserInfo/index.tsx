@@ -54,6 +54,9 @@ const UserInfo = () => {
       <div className={styles.userInfoSpend}>
         <h5>On subscriptions as a percentage you spend</h5>
         <span>{items.length > 0 ? percentSpend.toFixed(1) : 0}%</span>
+        <div className={styles.userInfoSpendPercent}>
+          <div style={{ width: `${items.length > 0 ? percentSpend.toFixed(0) : 0}%` }}></div>
+        </div>
       </div>
     </div>
   );
