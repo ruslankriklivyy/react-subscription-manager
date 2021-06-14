@@ -4,13 +4,17 @@ import styles from './subsItems.module.scss';
 import editSvg from '../../assets/img/edit.svg';
 import deleteSvg from '../../assets/img/delete.svg';
 import { useStore } from 'effector-react';
-import { $subsItems, removeItemFromSubs } from '../../store/store';
+import { $subsItems, removeItemFromSubs, setIsVisibleModal } from '../../store/store';
 
 const SubsItems = () => {
   const items = useStore($subsItems);
 
   const removeSub = (subId: number) => {
     removeItemFromSubs(subId);
+  };
+
+  const editSub = () => {
+    setIsVisibleModal(true);
   };
 
   return (
@@ -28,7 +32,7 @@ const SubsItems = () => {
           <span className={styles.subsItemInfo}>$ {price}</span>
           <span className={styles.subsItemInfo}>{payment}th</span>
           <div className={styles.subsItemActions}>
-            <button>
+            <button onClick={editSub}>
               <img src={editSvg} alt="edit svg" />
             </button>
             <button onClick={() => removeSub(id)}>
