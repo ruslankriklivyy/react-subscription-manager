@@ -5,30 +5,35 @@ import styles from './subsItems.module.scss';
 import editSvg from '../../assets/img/edit.svg';
 import deleteSvg from '../../assets/img/delete.svg';
 import {
-  $subColor,
-  $subName,
-  $subPayment,
-  $subPrice,
   $subsItems,
-  editSubItem,
   removeItemFromSubs,
   setEditSubId,
   setIsEditSub,
   setIsVisibleModal,
+  setSubColor,
+  setSubName,
+  setSubPayment,
+  setSubPrice,
 } from '../../store/store';
 
 const SubsItems = () => {
   const items = useStore($subsItems);
-  const color = useStore($subColor);
-  const name = useStore($subName);
-  const price = useStore($subPrice);
-  const payment = useStore($subPayment);
 
   const removeSub = (subId: string) => {
     removeItemFromSubs(subId);
   };
 
   const editSub = (subId: string) => {
+    const currentSub = items.filter((sub) => sub.id === subId);
+    setSubColor({
+      r: currentSub[0].color[0],
+      g: currentSub[0].color[1],
+      b: currentSub[0].color[2],
+    });
+    setSubName(currentSub[0].name);
+    setSubPrice(currentSub[0].price);
+    setSubPayment(currentSub[0].payment);
+
     setIsVisibleModal(true);
     setIsEditSub(true);
     setEditSubId(subId);
