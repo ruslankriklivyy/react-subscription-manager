@@ -1,5 +1,5 @@
 export interface ISubsItem {
-  id: number;
+  id: string;
   name: string;
   price: number;
   payment: number;

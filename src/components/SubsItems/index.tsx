@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './subsItems.module.scss';
+import { useStore } from 'effector-react';
 
+import styles from './subsItems.module.scss';
 import editSvg from '../../assets/img/edit.svg';
 import deleteSvg from '../../assets/img/delete.svg';
-import { useStore } from 'effector-react';
 import { $subsItems, removeItemFromSubs, setIsVisibleModal } from '../../store/store';
 
 const SubsItems = () => {
   const items = useStore($subsItems);
 
-  const removeSub = (subId: number) => {
+  const removeSub = (subId: string) => {
     removeItemFromSubs(subId);
   };
 

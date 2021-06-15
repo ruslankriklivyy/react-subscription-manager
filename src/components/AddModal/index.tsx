@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useStore } from 'effector-react';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   $isVisibleModal,
@@ -30,7 +31,7 @@ const AddModal = () => {
     }
 
     const newObj: ISubsItem = {
-      id: Math.random(),
+      id: uuidv4(),
       name,
       color: Object.values(color),
       price,
