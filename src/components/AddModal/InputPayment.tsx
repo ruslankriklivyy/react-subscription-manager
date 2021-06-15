@@ -10,11 +10,10 @@ const InputPayment: React.FC<IInputPayment> = ({ payment, setPayment }) => {
   return (
     <div className={styles.addModalInput}>
       <input
-        type="number"
+        type="text"
         placeholder="Enter payment"
         value={payment}
-        required
-        onChange={(e) => setPayment(Number(e.target.value))}
+        onChange={(e) => setPayment(+e.target.value.replace(/\D/, ''))}
       />
     </div>
   );

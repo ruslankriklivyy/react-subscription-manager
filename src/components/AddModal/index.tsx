@@ -4,10 +4,21 @@ import { useStore } from 'effector-react';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
+  $editSubId,
+  $isEditSub,
   $isVisibleModal,
+  $subColor,
+  $subName,
+  $subPayment,
+  $subPrice,
   addToSubsItems,
+  editSubItem,
   setIsVisibleModal,
   setIsVisiblePicker,
+  setSubColor,
+  setSubName,
+  setSubPayment,
+  setSubPrice,
 } from '../../store/store';
 import Palette from './Palette';
 import { ISubsItem } from '../../interfaces/interfaces';
@@ -18,11 +29,13 @@ import ModalActions from './ModalActions';
 import styles from './addModal.module.scss';
 
 const AddModal = () => {
-  const [color, setColor] = React.useState({ r: 0, g: 0, b: 0 });
-  const [name, setName] = React.useState('');
-  const [price, setPrice] = React.useState(0);
-  const [payment, setPayment] = React.useState(0);
+  const color = useStore($subColor);
+  const name = useStore($subName);
+  const price = useStore($subPrice);
+  const payment = useStore($subPayment);
   const visibleModal = useStore($isVisibleModal);
+  const isEdit = useStore($isEditSub);
+  const editSubId = useStore($editSubId);
   const blockOutRef = React.useRef<HTMLDivElement>(null);
 
   const addToSubs = () => {
@@ -41,12 +54,24 @@ const AddModal = () => {
     closeModal();
   };
 
+  const editSub = () => {
+    const newSubObj = {
+      id: editSubId,
+      name,
+      color: Object.values(color),
+      price,
+      payment,
+    };
+    editSubItem(newSubObj);
+    closeModal();
+  };
+
   const closeModal = React.useCallback(() => {
     setIsVisibleModal(false);
     setIsVisiblePicker(false);
-    setName('');
-    setPrice(0);
-    setPayment(0);
+    setSubName('');
+    setSubPrice(0);
+    setSubPayment(0);
   }, []);
 
   const escapeListener = React.useCallback(
@@ -87,12 +112,17 @@ const AddModal = () => {
         }`}></div>
       <div className={`${!visibleModal ? styles.addModal : styles.addModal + ' ' + styles.show}`}>
         <div className={styles.addModalWrapper}>
-          <Palette color={color} setColor={setColor} />
-          <InputName name={name} setName={setName} />
-          <InputPrice price={price} setPrice={setPrice} />
-          <InputPayment payment={payment} setPayment={setPayment} />
+          <Palette color={color} setColor={setSubColor} />
+          <InputName name={name} setName={setSubName} />
+          <InputPrice price={price} setPrice={setSubPrice} />
+          <InputPayment payment={payment} setPayment={setSubPayment} />
           <div className={styles.addModalBottom}>
-            <ModalActions addToSubs={addToSubs} closeModal={closeModal} />
+            <ModalActions
+              isEdit={isEdit}
+              editSub={editSub}
+              addToSubs={addToSubs}
+              closeModal={closeModal}
+            />
           </div>
         </div>
       </div>

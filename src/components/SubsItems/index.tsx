@@ -4,17 +4,34 @@ import { useStore } from 'effector-react';
 import styles from './subsItems.module.scss';
 import editSvg from '../../assets/img/edit.svg';
 import deleteSvg from '../../assets/img/delete.svg';
-import { $subsItems, removeItemFromSubs, setIsVisibleModal } from '../../store/store';
+import {
+  $subColor,
+  $subName,
+  $subPayment,
+  $subPrice,
+  $subsItems,
+  editSubItem,
+  removeItemFromSubs,
+  setEditSubId,
+  setIsEditSub,
+  setIsVisibleModal,
+} from '../../store/store';
 
 const SubsItems = () => {
   const items = useStore($subsItems);
+  const color = useStore($subColor);
+  const name = useStore($subName);
+  const price = useStore($subPrice);
+  const payment = useStore($subPayment);
 
   const removeSub = (subId: string) => {
     removeItemFromSubs(subId);
   };
 
-  const editSub = () => {
+  const editSub = (subId: string) => {
     setIsVisibleModal(true);
+    setIsEditSub(true);
+    setEditSubId(subId);
   };
 
   return (
@@ -32,7 +49,7 @@ const SubsItems = () => {
           <span className={styles.subsItemInfo}>$ {price}</span>
           <span className={styles.subsItemInfo}>{payment}th</span>
           <div className={styles.subsItemActions}>
-            <button onClick={editSub}>
+            <button onClick={() => editSub(id)}>
               <img src={editSvg} alt="edit svg" />
             </button>
             <button onClick={() => removeSub(id)}>

@@ -5,3 +5,9 @@ export interface ISubsItem {
   payment: number;
   color: number[];
 }
+
+export interface ISubsColor {
+  r: number;
+  g: number;
+  b: number;
+}

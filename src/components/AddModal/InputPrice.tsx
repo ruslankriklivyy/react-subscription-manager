@@ -10,11 +10,11 @@ const InputPrice: React.FC<IInputPrice> = ({ price, setPrice }) => {
   return (
     <div className={styles.addModalInput}>
       <input
-        type="number"
+        type="text"
         placeholder="Enter price"
         value={price}
         required
-        onChange={(e) => setPrice(Number(e.target.value))}
+        onChange={(e) => setPrice(+e.target.value.replace(/\D/, ''))}
       />
     </div>
   );
