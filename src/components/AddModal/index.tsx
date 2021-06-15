@@ -13,6 +13,7 @@ import {
   $subPrice,
   addToSubsItems,
   editSubItem,
+  setIsEditSub,
   setIsVisibleModal,
   setIsVisiblePicker,
   setSubColor,
@@ -63,6 +64,7 @@ const AddModal = () => {
       payment,
     };
     editSubItem(newSubObj);
+    setIsEditSub(false);
     closeModal();
   };
 
