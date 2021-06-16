@@ -16,7 +16,7 @@ export const setUserProfit = createEvent<number>();
 // Events AddModal inputs values
 export const setSubColor = createEvent<ISubsColor>();
 export const setSubName = createEvent<string>();
-export const setSubPrice = createEvent<number>();
+export const setSubPrice = createEvent<string>();
 export const setSubPayment = createEvent<number>();
 
 // Events edit mode
@@ -26,7 +26,7 @@ export const setIsEditSub = createEvent<boolean>();
 // Stores AddModal inputs values
 export const $subColor = createStore({ r: 0, g: 0, b: 0 }).on(setSubColor, (state, color) => color);
 export const $subName = createStore('').on(setSubName, (state, name) => name);
-export const $subPrice = createStore(0).on(setSubPrice, (state, price) => price);
+export const $subPrice = createStore('').on(setSubPrice, (state, price) => price);
 export const $subPayment = createStore(0).on(setSubPayment, (state, payment) => payment);
 
 // Stores edit mode
@@ -66,7 +66,7 @@ export const $userTotalSubs = createStore(0);
 export const $totalSumSubs = combine($subsItems, $userTotalSubs, (subs, total) => {
   const totalSubs = subs.map((item) => item.price);
   const totalSum = totalSubs.reduce((acc, num) => (acc += num));
-  return (total = totalSum);
+  return (total = +totalSum);
 });
 export const $totalSpend = combine($totalSumSubs, $userProfit, (totalSumSubs, userProfit) => {
   let percent = (totalSumSubs / userProfit) * 100;

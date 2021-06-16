@@ -17,11 +17,13 @@ const UserInfo = () => {
   const percentSpend = useStore($totalSpend);
 
   const editProfit = () => {
-    const profit = Number(prompt('Enter your profit: ', '0'));
-    if (profit && profit > 0) {
-      setUserProfit(profit);
-    } else {
-      alert('⚠ Enter a number and it must be greater than zero.');
+    const profit = prompt('Enter your profit: ', '');
+    if (profit) {
+      if (!/^\d+\.?\d*$/gm.test(profit) || parseFloat(profit) < 1 || parseFloat(profit) > 10000) {
+        alert('⚠ Enter a number and it must be greater than zero.');
+      } else {
+        setUserProfit(+profit);
+      }
     }
   };
 

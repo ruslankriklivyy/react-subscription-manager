@@ -31,7 +31,7 @@ const SubsItems = () => {
       b: currentSub[0].color[2],
     });
     setSubName(currentSub[0].name);
-    setSubPrice(currentSub[0].price);
+    setSubPrice(currentSub[0].price.toString());
     setSubPayment(currentSub[0].payment);
 
     setIsVisibleModal(true);

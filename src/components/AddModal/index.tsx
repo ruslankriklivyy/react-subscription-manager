@@ -28,6 +28,7 @@ import InputPrice from './InputPrice';
 import InputPayment from './InputPayment';
 import ModalActions from './ModalActions';
 import styles from './addModal.module.scss';
+import { checkCorrectInput } from '../../utils/checkCorrectInput';
 
 const AddModal = () => {
   const color = useStore($subColor);
@@ -40,39 +41,43 @@ const AddModal = () => {
   const blockOutRef = React.useRef<HTMLDivElement>(null);
 
   const addToSubs = () => {
-    if (!name || !price || !payment) {
-      return alert('⚠ Enter info!');
-    }
+    const checkedCorrect = checkCorrectInput(name, price, payment);
 
-    const newObj: ISubsItem = {
-      id: uuidv4(),
-      name,
-      color: Object.values(color),
-      price,
-      payment,
-    };
-    addToSubsItems(newObj);
-    closeModal();
+    if (checkedCorrect) {
+      const newObj: ISubsItem = {
+        id: uuidv4(),
+        name,
+        color: Object.values(color),
+        price: parseFloat(price),
+        payment,
+      };
+      addToSubsItems(newObj);
+      closeModal();
+    }
   };
 
   const editSub = () => {
-    const newSubObj = {
-      id: editSubId,
-      name,
-      color: Object.values(color),
-      price,
-      payment,
-    };
-    editSubItem(newSubObj);
-    setIsEditSub(false);
-    closeModal();
+    const checkedCorrect = checkCorrectInput(name, price, payment);
+
+    if (checkedCorrect) {
+      const newSubObj = {
+        id: editSubId,
+        name,
+        color: Object.values(color),
+        price: parseFloat(price),
+        payment,
+      };
+      editSubItem(newSubObj);
+      setIsEditSub(false);
+      closeModal();
+    }
   };
 
   const closeModal = React.useCallback(() => {
     setIsVisibleModal(false);
     setIsVisiblePicker(false);
     setSubName('');
-    setSubPrice(0);
+    setSubPrice('0');
     setSubPayment(0);
   }, []);
 

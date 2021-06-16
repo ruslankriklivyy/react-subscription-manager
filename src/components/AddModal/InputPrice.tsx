@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './addModal.module.scss';
 
 interface IInputPrice {
-  price: number;
-  setPrice: (price: number) => void;
+  price: string;
+  setPrice: (price: string) => void;
 }
 
 const InputPrice: React.FC<IInputPrice> = ({ price, setPrice }) => {
@@ -14,7 +14,7 @@ const InputPrice: React.FC<IInputPrice> = ({ price, setPrice }) => {
         placeholder="Enter price"
         value={price}
         required
-        onChange={(e) => setPrice(+e.target.value.replace(/\D/, ''))}
+        onChange={(e) => setPrice(e.target.value)}
       />
     </div>
   );
