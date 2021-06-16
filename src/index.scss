@@ -178,13 +178,27 @@ table {
 }
 .subs {
   height: 80vh;
+  @media (max-width: 992px) {
+    height: 50vh;
+  }
 }
 .box {
   display: flex;
+  @media (max-width: 992px) {
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
 }
 .left-section {
   width: 67%;
+  @media (max-width: 992px) {
+    width: 100%;
+  }
 }
 .right-section {
   width: 33%;
+  @media (max-width: 992px) {
+    width: 100%;
+    margin-bottom: 40px;
+  }
 }

@@ -3,6 +3,9 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 40px;
+  @media (max-width: 578px) {
+    flex-direction: column;
+  }
 }
 .title {
   font-weight: 600;
@@ -37,5 +40,8 @@
     height: 18px;
     margin-right: 10px;
     transition: all 0.6s ease;
+  }
+  @media (max-width: 578px) {
+    margin-top: 20px;
   }
 }
