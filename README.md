@@ -13,6 +13,5 @@
 - Effector
 - effector-react
 - react-colorful
-- styled-components
 - uuid
 - SCSS modules
