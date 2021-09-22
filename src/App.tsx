@@ -1,5 +1,9 @@
 import React from 'react';
-import { TopSubs, SubsCategory, SubsItems, AddModal, UserInfo } from './components';
+import { AddModal } from './components/AddModal';
+import { SubsCategory } from './components/SubsCategory';
+import { SubsItems } from './components/SubsItems';
+import { TopSubs } from './components/TopSubs';
+import { UserInfo } from './components/UserInfo';
 
 function App() {
   return (

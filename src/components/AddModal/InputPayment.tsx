@@ -6,7 +6,7 @@ interface IInputPayment {
   setPayment: (payment: number) => void;
 }
 
-const InputPayment: React.FC<IInputPayment> = ({ payment, setPayment }) => {
+export const InputPayment: React.FC<IInputPayment> = ({ payment, setPayment }) => {
   return (
     <div className={styles.addModalInput}>
       <input
@@ -18,5 +18,3 @@ const InputPayment: React.FC<IInputPayment> = ({ payment, setPayment }) => {
     </div>
   );
 };
-
-export default InputPayment;

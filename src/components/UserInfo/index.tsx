@@ -10,7 +10,7 @@ import {
   setUserProfit,
 } from '../../store/store';
 
-const UserInfo = () => {
+export const UserInfo = () => {
   const profit = useStore($userProfit);
   const totalSum = useStore($totalSumSubs);
   const items = useStore($subsItems);
@@ -63,5 +63,3 @@ const UserInfo = () => {
     </div>
   );
 };
-
-export default UserInfo;

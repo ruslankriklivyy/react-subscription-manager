@@ -9,7 +9,12 @@ interface IModalActions {
   isEdit: boolean;
 }
 
-const ModalActions: React.FC<IModalActions> = ({ addToSubs, editSub, closeModal, isEdit }) => {
+export const ModalActions: React.FC<IModalActions> = React.memo(function ModalActions({
+  addToSubs,
+  editSub,
+  closeModal,
+  isEdit,
+}) {
   return (
     <>
       <button onClick={!isEdit ? addToSubs : editSub}>
@@ -20,6 +25,4 @@ const ModalActions: React.FC<IModalActions> = ({ addToSubs, editSub, closeModal,
       </button>
     </>
   );
-};
-
-export default React.memo(ModalActions);
+});

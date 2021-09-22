@@ -21,16 +21,16 @@ import {
   setSubPayment,
   setSubPrice,
 } from '../../store/store';
-import Palette from './Palette';
 import { ISubsItem } from '../../interfaces/interfaces';
-import InputName from './InputName';
-import InputPrice from './InputPrice';
-import InputPayment from './InputPayment';
-import ModalActions from './ModalActions';
 import styles from './addModal.module.scss';
 import { checkCorrectInput } from '../../utils/checkCorrectInput';
+import { Palette } from './Palette';
+import { InputName } from './InputName';
+import { InputPrice } from './InputPrice';
+import { InputPayment } from './InputPayment';
+import { ModalActions } from './ModalActions';
 
-const AddModal = () => {
+export const AddModal = React.memo(function AddModal() {
   const color = useStore($subColor);
   const name = useStore($subName);
   const price = useStore($subPrice);
@@ -136,6 +136,4 @@ const AddModal = () => {
     </>,
     document.getElementById('addModal')!,
   );
-};
-
-export default React.memo(AddModal);
+});

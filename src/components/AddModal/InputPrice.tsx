@@ -6,7 +6,7 @@ interface IInputPrice {
   setPrice: (price: string) => void;
 }
 
-const InputPrice: React.FC<IInputPrice> = ({ price, setPrice }) => {
+export const InputPrice: React.FC<IInputPrice> = ({ price, setPrice }) => {
   return (
     <div className={styles.addModalInput}>
       <input
@@ -19,5 +19,3 @@ const InputPrice: React.FC<IInputPrice> = ({ price, setPrice }) => {
     </div>
   );
 };
-
-export default InputPrice;

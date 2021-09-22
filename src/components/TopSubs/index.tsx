@@ -4,7 +4,7 @@ import { setIsVisibleModal } from '../../store/store';
 import styles from './topSubs.module.scss';
 import plusSvg from '../../assets/img/plus.svg';
 
-const TopSubs = () => {
+export const TopSubs = () => {
   return (
     <div className={styles.top}>
       <h1 className={styles.title}>My subscriptions</h1>
@@ -15,5 +15,3 @@ const TopSubs = () => {
     </div>
   );
 };
-
-export default TopSubs;

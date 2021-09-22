@@ -10,7 +10,7 @@ interface IPalette {
   setColor: (val: RgbColor) => void;
 }
 
-const Palette: React.FC<IPalette> = ({ color, setColor }) => {
+export const Palette: React.FC<IPalette> = React.memo(function Palette({ color, setColor }) {
   const visiblePicker = useStore($isVisiblePicker);
 
   return (
@@ -27,6 +27,4 @@ const Palette: React.FC<IPalette> = ({ color, setColor }) => {
       )}
     </div>
   );
-};
-
-export default React.memo(Palette);
+});

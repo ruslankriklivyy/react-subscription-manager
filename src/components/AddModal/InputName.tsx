@@ -6,7 +6,7 @@ interface IInputName {
   setName: (name: string) => void;
 }
 
-const InputName: React.FC<IInputName> = ({ name, setName }) => {
+export const InputName: React.FC<IInputName> = React.memo(function InputName({ name, setName }) {
   return (
     <div className={styles.addModalInput}>
       <input
@@ -18,6 +18,4 @@ const InputName: React.FC<IInputName> = ({ name, setName }) => {
       />
     </div>
   );
-};
-
-export default React.memo(InputName);
+});

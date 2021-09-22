@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './subsCategory.module.scss';
 
-const SubsCategory = () => {
+export const SubsCategory = () => {
   return (
     <div className={styles.subsCategory}>
       <span>service</span>
@@ -17,5 +17,3 @@ const SubsCategory = () => {
     </div>
   );
 };
-
-export default SubsCategory;

@@ -16,7 +16,7 @@ import {
   setSubPrice,
 } from '../../store/store';
 
-const SubsItems = () => {
+export const SubsItems = () => {
   const items = useStore($subsItems);
 
   const removeSub = (subId: string) => {
@@ -66,5 +66,3 @@ const SubsItems = () => {
     </div>
   );
 };
-
-export default SubsItems;
